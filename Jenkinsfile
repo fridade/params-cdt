@@ -3,6 +3,8 @@ pipeline {
     parameters {
       string description: 'Enter your first name ', name: 'firstName'
       string description: 'Enter your last name ', name: 'lastName'
+      choice choices: ['dev', 'qa', 'prod'], description: 'choose the env where you want the build to happen', name: 'Environment'
+
     }
 
 
@@ -12,20 +14,35 @@ pipeline {
                 echo "hi ${params.firstName} ${params.lastName}, welcome"
             }
         }
-        stage('stage2') {
+        stage('deploy to dev') {
+            when {
+                expression {
+                    params.Environment == "dev"
+                }
+            }
             steps {
-                echo 'Hello World bonjour'
+                echo 'Hello World bonjour dev'
             }
         }
-        stage('stage3') {
+        stage('deploy to qa') {
+            when {
+                expression {
+                    params.Environment == "qa"
+                }
+            }
             steps {
-                echo 'Hello World bonjour'
+                echo 'Hello World bonjour qa'
             }
             
         }
-        stage('stage4') {
+        stage('deploy to prod') {
+            when {
+                expression {
+                    params.Environment == "prod"
+                }
+            }
             steps {
-                echo 'Hello World bonjour'
+                echo 'Hello World bonjour prod'
             }
             
         }
