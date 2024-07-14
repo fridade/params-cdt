@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-      string description: 'Enter your first name ', name: 'fistName'
+      string description: 'Enter your first name ', name: 'firstName'
       string description: 'Enter your last name ', name: 'lastName'
     }
 
